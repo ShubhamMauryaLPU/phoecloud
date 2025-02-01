@@ -13,7 +13,7 @@ const DigitalBoosts = () => {
       </p>
       <Link to={"/contact"} className="text-black dark:text-white ">
         <button className="hover:bg-blue-950 rounded-lg mt-5 p-2 px-5 text-lg">
-          Contact Us Today &nbsp; <i class="fa-solid fa-arrow-right-long"></i>
+          Contact Us Today &nbsp; <i className="fa-solid fa-arrow-right-long"></i>
         </button>
       </Link>
     </div>

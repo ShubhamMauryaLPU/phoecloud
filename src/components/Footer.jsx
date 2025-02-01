@@ -1,35 +1,7 @@
 import { Link } from "react-router-dom";
 import React from "react";
-// import { FloatingDock } from "../ui/floating-dock";
-import {
-    IconBrandFacebook,
-  IconBrandGithub,
-  IconBrandX,
-} from "@tabler/icons-react";
+
 const Footer = () => {
-  const links = [
-    {
-      title: "Twitter",
-      icon: (
-        <IconBrandX className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-      ),
-      href: "#",
-    },
-    {
-      title: "GitHub",
-      icon: (
-        <IconBrandGithub className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-      ),
-      href: "#",
-    },
-    {
-      title: "Facebook",
-      icon: (
-        <IconBrandFacebook className="h-full w-full text-neutral-500 dark:text-neutral-300" />
-      ),
-      href: "#",
-    },
-  ];
   return (
     <footer className="bg-black text-gray-400 py-12 lg:h-[65vh] z-10">
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 px-4 sm:px-6 lg:px-8">
@@ -174,18 +146,17 @@ const Footer = () => {
         </div>
         <hr className="w-full" />
       </div>
-      <div>
-       
-      </div>
-      {/* <div className=" w-full">
-        <p className="float-left px-3.5 mt-3">
+      <div></div>
+      <div className=" w-full">
+        <p className="float-left pl-3 lg:px-20 lg:mt-4 inline">
           &copy; Cruip.com. All rights reserved.
         </p>
-        <FloatingDock
-          mobileClassName="float-right " 
-          items={links}
-        />
-      </div> */}
+        <span className="float-right text-2xl  pr-2 lg:px-20">
+            <i className="fa-brands fa-x-twitter mx-3"></i>
+            <a href="https://www.linkedin.com/company/phoetech/"> <i className="fa-brands fa-linkedin-in mx-3"></i></a>
+            <i className="fa-brands fa-facebook mx-3"></i>
+          </span>
+      </div>
     </footer>
   );
 };

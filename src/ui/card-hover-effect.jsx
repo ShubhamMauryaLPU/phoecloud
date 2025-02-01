@@ -1,3 +1,4 @@
+"use client";
 import { cn } from "../utils/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "react-router-dom";
@@ -15,7 +16,7 @@ export const HoverEffect = ({
       {items.map((item, idx) => (
         <Link
           to={item?.link}
-          key={item?.link}
+          key={idx}
           className="relative group  block p-2 h-full w-full"
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}>
@@ -77,7 +78,7 @@ export const CardDescription = ({
 }) => {
   return (
     (<p
-      className={cn("my-6 text-zinc-400 tracking-wide leading-relaxed text-base ", className)}>
+      className={cn("my-6 text-zinc-300 tracking-wide leading-relaxed text-base ", className)}>
       {children}
     </p>)
   );

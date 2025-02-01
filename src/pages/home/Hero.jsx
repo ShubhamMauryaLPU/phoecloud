@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Spotlight } from "../../ui/spotlight-new";
 const Hero = () => {
   return (
-    <div className='bg-[url(/image/heroImg.jpg)] bg-no-repeat bg-cover w-full h-[100vh] relative overflow-hidden flex justify-center items-center'>
+    <div className='bg-[url(/image/heroImg.webp)] bg-no-repeat bg-cover w-full h-[100vh] relative overflow-hidden flex justify-center items-center z-1'>
       <Spotlight />
       <div className='flex flex-col justify-center items-center text-center'>
       <h1 className=' text-blue-100 font-[new-times-roman]  font-extrabold text-4xl md:text-5xl'>Welcome to PhoeTech</h1>
