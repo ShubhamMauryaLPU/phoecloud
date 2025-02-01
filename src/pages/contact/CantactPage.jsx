@@ -1,6 +1,5 @@
 
 import React, {useState } from 'react'; 
-import { BackgroundBeams } from '../../ui/background-beams';
 function ContactPage() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -43,7 +42,6 @@ function ContactPage() {
           </button>
         </form>
       </div>
-      <BackgroundBeams />
     </div>
   );
 }
