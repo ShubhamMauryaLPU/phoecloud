@@ -1,5 +1,6 @@
 "use client";
-import WorldMap from "../../ui/world-map";
+import { lazy, Suspense } from "react";
+const WorldMap = lazy(() => import("../../ui/world-map"));
 export default function Mission() {
   return (
     <div className=" pt-4 dark:bg-gray-950 bg-white w-full">
@@ -14,40 +15,48 @@ export default function Mission() {
           of what's possible and redefining industry standards.
         </p>
       </div>
-      <WorldMap
-        dots={[
-          {
-            start: {
-              lat: 64.2008,
-              lng: -149.4937,
-            }, // Alaska (Fairbanks)
-            end: {
-              lat: 34.0522,
-              lng: -118.2437,
-            }, // Los Angeles
-          },
-          {
-            start: { lat: 64.2008, lng: -149.4937 }, // Alaska (Fairbanks)
-            end: { lat: -15.7975, lng: -47.8919 }, // Brazil (Brasília)
-          },
-          {
-            start: { lat: -15.7975, lng: -47.8919 }, // Brazil (Brasília)
-            end: { lat: 51.5074, lng: -0.1278 }, // Lisbon
-          },
-          {
-            start: { lat: 51.5074, lng: -0.1278 }, // London
-            end: { lat: 12.9716, lng: 77.5946 }, // New Delhi
-          },
-          {
-            start: { lat: 12.9716, lng: 77.5946 }, // New Delhi
-            end: { lat: 43.1332, lng: 131.9113 }, // Vladivostok
-          },
-          {
-            start: { lat: 12.9716, lng: 77.5946 }, // New Delhi
-            end: { lat: -1.2921, lng: 36.8219 }, // Nairobi
-          },
-        ]}
-      />
+      <Suspense
+        fallback={
+          <div className="text-white text-center text-bold text-3xl">
+            World Map is loading...
+          </div>
+        }
+      >
+        <WorldMap
+          dots={[
+            {
+              start: {
+                lat: 64.2008,
+                lng: -149.4937,
+              }, // Alaska (Fairbanks)
+              end: {
+                lat: 34.0522,
+                lng: -118.2437,
+              }, // Los Angeles
+            },
+            {
+              start: { lat: 64.2008, lng: -149.4937 }, // Alaska (Fairbanks)
+              end: { lat: -15.7975, lng: -47.8919 }, // Brazil (Brasília)
+            },
+            {
+              start: { lat: -15.7975, lng: -47.8919 }, // Brazil (Brasília)
+              end: { lat: 51.5074, lng: -0.1278 }, // Lisbon
+            },
+            {
+              start: { lat: 51.5074, lng: -0.1278 }, // London
+              end: { lat: 12.9716, lng: 77.5946 }, // New Delhi
+            },
+            {
+              start: { lat: 12.9716, lng: 77.5946 }, // New Delhi
+              end: { lat: 43.1332, lng: 131.9113 }, // Vladivostok
+            },
+            {
+              start: { lat: 12.9716, lng: 77.5946 }, // New Delhi
+              end: { lat: -1.2921, lng: 36.8219 }, // Nairobi
+            },
+          ]}
+        />
+      </Suspense>
     </div>
   );
 }

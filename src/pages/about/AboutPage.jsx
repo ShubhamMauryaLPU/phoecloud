@@ -4,7 +4,6 @@ import Mission from './Mission'
 import CoreValues from './CoreValues'
 import Approach from './Approach'
 import Team from './Team'
-
 const AboutPage = () => {
   return (
     <>
