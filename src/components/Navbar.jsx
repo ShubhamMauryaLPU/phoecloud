@@ -8,16 +8,26 @@ import {
   MenuItems,
 } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 let navigation = [
   { name: "Home", to: "/home", current: true },
   {
     name: "Our Services",
     current: false,
     children: [
-      { name: "Revenue Base Financing", to: "/services/revenue", current: false },
+      {
+        name: "Revenue Base Financing",
+        to: "/services/revenue",
+        current: false,
+      },
       { name: "Finance Management", to: "/services/finance", current: false },
-      { name: "Digital Transformation", to: "/services/digital", current: false },
+      {
+        name: "Digital Transformation",
+        to: "/services/digital",
+        current: false,
+      },
     ],
   },
   { name: "About Us", to: "/about", current: false },
@@ -29,6 +39,8 @@ function classNames(...classes) {
 }
 
 export default function Example() {
+  let [user, setUser] = useState("");
+  let [img,setImg]=useState(null);
   let handleNavigationClick = (name) => {
     navigation = navigation.map((item) =>
       item.name === name
@@ -36,7 +48,27 @@ export default function Example() {
         : { ...item, current: false }
     );
   };
-
+  let handleLogout=()=>{
+    sessionStorage.removeItem("user");
+    setUser(null);
+  }
+  useEffect(() => {
+    try {
+      const data = sessionStorage.getItem("user");
+      if (data) {
+        const parsedData = JSON.parse(data);
+        if (parsedData.username) {
+          setUser(parsedData.username);
+        }
+        if(parsedData.image){
+          setImg(parsedData.image);
+        }
+      }
+    } catch (e) {
+      console.error("Error parsing user data:", e);
+      sessionStorage.removeItem("user");
+    }
+  }, []);
   return (
     <Disclosure
       as="nav"
@@ -64,7 +96,7 @@ export default function Example() {
                 <img
                   alt="Your Company"
                   src="/image/LogoText.png"
-                  className="h-9 w-30 pl-2"
+                  className="h-9 w-30 pl-2 cursor-pointer"
                 />
               </Link>
             </div>
@@ -103,11 +135,10 @@ export default function Example() {
                       to={item.to}
                       key={idx}
                       aria-current={item.current ? "page" : undefined}
-                      className={`${
-                        item.current
-                          ? "bg-gray-900 text-white"
-                          : "text-gray-300 hover:bg-gray-700 hover:text-white"
-                      } rounded-md px-3 py-2 text-sm font-medium`}
+                      className={`
+                        
+                     text-gray-300 hover:bg-gray-700 hover:text-white
+                      rounded-md px-3 py-2 text-sm font-medium`}
                     >
                       {item.name}
                     </Link>
@@ -127,52 +158,58 @@ export default function Example() {
             </button>
 
             {/* Profile dropdown */}
-            <Menu as="div" className="relative ml-3">
-              <div>
-                <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
-                  <span className="absolute -inset-1.5" />
-                  <span className="sr-only">Open user menu</span>
-                  <img
-                    alt="ProImage"
-                    src="/image/amritImg.webp"
-                    className="size-8 rounded-full"
-                  />
-                </MenuButton>
-              </div>
-              <MenuItems
-                transition
-                className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
-              >
-                <MenuItem>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                  >
-                    Your Profile
-                  </a>
-                </MenuItem>
-                <MenuItem>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                  >
-                    Settings
-                  </a>
-                </MenuItem>
-                <MenuItem>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
-                  >
-                    Sign out
-                  </a>
-                </MenuItem>
-              </MenuItems>
-            </Menu>
+            {user ? (
+              <Menu as="div" className="relative ml-3">
+                <div>
+                  <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
+                    <span className="absolute -inset-1.5" />
+                    <span className="sr-only">Open user menu</span>
+                    <img
+                      alt="ProImage"
+                      src={img}
+                      className="size-8 rounded-full"
+                    />
+                  </MenuButton>
+                </div>
+                <MenuItems
+                  transition
+                  className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 ring-1 shadow-lg ring-black/5 transition focus:outline-hidden data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in"
+                >
+                  <MenuItem>
+                    <Link
+                      to={"/user/profile"}
+                      className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                    >
+                      Your Profile
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link
+                      to={"/user/setting"}
+                      className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                    >
+                      Settings
+                    </Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <p
+                      onClick={handleLogout}
+                      className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                    >
+                      Sign out
+                    </p>
+                  </MenuItem>
+                </MenuItems>
+              </Menu>
+            ) : (
+              <Link to={"/user/login"}>
+                <button className="text-white px-4 py-2 rounded-lg mx-3 bg-blue-600">Log in</button>
+              </Link>
+            )}
           </div>
         </div>
       </div>
-        {/* Navbar for the sm devices */}
+      {/* Navbar for the sm devices */}
       <DisclosurePanel className="sm:hidden">
         <div className="space-y-1 px-2 pt-2 pb-3 z-50">
           {navigation.map((item) =>
