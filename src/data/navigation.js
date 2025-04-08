@@ -1,15 +1,1 @@
-let navData = [
-  { name: "Home", to: "/home", current: true },
-  {
-    name: "Our Services",
-    current: false,
-    children: [
-      { name: "Revenue Base Financing", to: "/services/revenue", current: false },
-      { name: "Finance Management", to: "/services/finance", current: false },
-      { name: "Digital Transformation", to: "/services/digital", current: false },
-    ],
-  },
-  { name: "About Us", to: "/about", current: false },
-  { name: "Contact Us", to: "/contact", current: false },
-];
-export default navData;
+let navData=[{name:"Home",to:"/home",current:!0},{name:"Our Services",current:!1,children:[{name:"Revenue Base Financing",to:"/services/revenue",current:!1},{name:"Finance Management",to:"/services/finance",current:!1},{name:"Digital Transformation",to:"/services/digital",current:!1}]},{name:"About Us",to:"/about",current:!1},{name:"Contact Us",to:"/contact",current:!1}];export default navData;
