@@ -32,6 +32,7 @@ let navigation = [
   },
   { name: "About Us", to: "/about", current: false },
   { name: "Contact Us", to: "/contact", current: false },
+  {name:"Vision",to:"/vision",current:!1}
 ];
 
 function classNames(...classes) {

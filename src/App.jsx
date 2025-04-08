@@ -13,6 +13,7 @@ import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
 import Profile from "./components/Profile";
 import UserSettings from "./components/UserSettings";
+import VisionPage from "./components/VisionPage";
 const App = () => {
   return (
     <BrowserRouter>
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/user/register" element={<RegisterPage/>} />
         <Route path="/user/profile" element={<Profile/>} />
         <Route path="/user/setting" element={<UserSettings/>} />
+        <Route path="/vision" element={<VisionPage/>} />
       </Routes>
       <Footer />
     </BrowserRouter>
