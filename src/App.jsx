@@ -1,4 +1,5 @@
 import React from "react";
+import { useState,useEffect } from "react";
 import "./App.css";
 import HomePage from "./pages/home/HomePage";
 import Navbar from "./components/Navbar";
@@ -15,6 +16,18 @@ import Profile from "./components/Profile";
 import UserSettings from "./components/UserSettings";
 import VisionPage from "./components/VisionPage";
 const App = () => {
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const handleOnline = () => setIsOnline(true);
+  const handleOffline = () => setIsOnline(false);
+  useEffect(() => {
+    window.addEventListener("online", handleOnline);
+    window.addEventListener("offline", handleOffline);
+    return () => {
+      window.removeEventListener("online", handleOnline);
+      window.removeEventListener("offline", handleOffline);
+    };
+  }, []);
+
   return (
     <BrowserRouter>
       <Navbar />
@@ -33,6 +46,11 @@ const App = () => {
         <Route path="/vision" element={<VisionPage/>} />
       </Routes>
       <Footer />
+      {!isOnline && (
+        <div className="fixed bottom-0 w-full bg-red-600 text-white text-center p-2 z-50">
+          ⚠️ You are currently offline
+        </div>
+      )}
     </BrowserRouter>
   );
 };
